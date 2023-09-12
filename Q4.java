@@ -17,7 +17,7 @@ class Q4{
                         link current=l.first;
                         link start=null;
                         link end=null;
-                        boolean found = true;
+                        boolean found = false;
 
                         while (current!=null)
                               {
