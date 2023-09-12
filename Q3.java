@@ -26,7 +26,13 @@ class Q3{
                             System.out.println("2nd list is");
                             l2.displaylist();
                             System.out.println(" ");
+                            
+                            System.out.println("Union without common elements");
                             singlelinkedlist union=new singlelinkedlist();
+                            singlelinkedlist union_new = new singlelinkedlist();
+                            unionLink(l1, l2).displaylist();
+                            System.out.println();
+
                             singlelinkedlist intersect=new singlelinkedlist();
                             l1.temp=l1.first;
                             l2.temp=l2.first;
@@ -80,7 +86,48 @@ class Q3{
                                   intersect.displaylist();
                             input.close();
                        }
+                    static singlelinkedlist unionLink(singlelinkedlist l1, singlelinkedlist l2) {
+                        link temp = l1.first;
+                        singlelinkedlist result = new singlelinkedlist();
+                        while(temp != null) {
+                            link temp_result = result.first;
+                            boolean copy = false;
+
+                            while (temp_result != null) {
+                                if (temp.data == temp_result.data) { // data already there in union
+                                    copy = true;
+                                    break;
+                                }
+                                temp_result = temp_result.next;
+                            }
+                            if (!copy) {
+                                result.insertlast(temp.data);
+                                copy = false;
+                            }
+                            temp = temp.next;
+                        }
+                        temp = l2.first; // same but for the second list
+                        while(temp != null) {
+                            link temp_result = result.first;
+                            boolean copy = false;
+
+                            while (temp_result != null) {
+                                if (temp.data == temp_result.data) { // data already there in union
+                                    copy = true;
+                                    break;
+                                }
+                                temp_result = temp_result.next;
+                            }
+                            if (!copy) {
+                                result.insertlast(temp.data);
+                                copy = false;
+                            }
+                            temp = temp.next;
+                        }
+                        return result;
                     }
+                    }
+                    
 class link
 {
     int data;
