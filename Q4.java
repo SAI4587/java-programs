@@ -17,20 +17,24 @@ class Q4{
                         link current=l.first;
                         link start=null;
                         link end=null;
+                        boolean found = true;
+
                         while (current!=null)
                               {
                                 if (current.data=='h')
                                   {
                                    start=current;
                                    end=start;
-                                   if (end.next.data=='i')
+                                   if (end.next != null && end.next.data=='i') // avoid npe
                                       {
                                         end=end.next;
-                                        if (end.next.data=='s')
+                                        if (end.next!= null &&  end.next.data=='s') {
                                            end=end.next;
+                                           found = true;
+                                        }
                                       }
                                   }
-                                if (end!=null && start!=null && start!=end)
+                                if (found) // start != end even when partial output found
                                    {
                                     link temp=start;
                                     temp.data='s';
@@ -38,7 +42,7 @@ class Q4{
                                     temp.data='h';
                                     temp=temp.next;
                                     temp.data='e';
-                                    temp=temp.next;
+                                    found = false; // reset found
                                    }
                                 current=current.next;                   
                               }
